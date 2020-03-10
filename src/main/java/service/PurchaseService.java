@@ -1,5 +1,7 @@
 package service;
 
+import domain.Book;
+import domain.Client;
 import domain.validators.*;
 import domain.Purchase;
 import repository.Repository;
@@ -12,16 +14,25 @@ import java.util.stream.StreamSupport;
 public class PurchaseService {
     private Repository<Long, Purchase> repository;
     protected Validator<Purchase> validator;
+    private BookService bookService;
+    private ClientService clientService;
 
-    public PurchaseService(Repository<Long, Purchase> repository, Validator<Purchase> validator) {
+    public PurchaseService(Repository<Long, Purchase> repository, Validator<Purchase> validator, BookService bookService, ClientService clientService) {
         this.repository = repository;
         this.validator = validator;
+        this.bookService = bookService;
+        this.clientService = clientService;
     }
 
     public void addPurchase(Purchase purchase) throws ValidatorException {
         try {
             validator.validate(purchase);
-            repository.save(purchase);
+
+            if ((this.bookService.findOne(purchase.getBookID()).isPresent()) && (this.clientService.findOne(purchase.getClientID()).isPresent()))
+                repository.save(purchase);
+            else
+                throw new ValidatorException("ID for book or client is invalid.") ;
+
         } catch (ValidatorException err){
             System.out.println(err);
         }

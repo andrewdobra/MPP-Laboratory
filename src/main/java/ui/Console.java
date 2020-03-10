@@ -162,8 +162,8 @@ public class Console {
             }
             try {
                 purchaseService.addPurchase(purchase);
-            } catch (ValidatorException e) {
-                e.printStackTrace();
+            } catch (ValidatorException err) {
+                System.out.println(err.toString());
             }
         }
     }
@@ -207,8 +207,8 @@ public class Console {
             Long BID = Long.valueOf(bufferRead.readLine());
 
             return new Purchase(id, CID, BID);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception err) {
+            System.out.println(err);
         }
         return null;
     }

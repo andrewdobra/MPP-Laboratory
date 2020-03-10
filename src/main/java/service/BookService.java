@@ -6,6 +6,7 @@ import domain.validators.ValidatorException;
 import repository.Repository;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -26,6 +27,13 @@ public class BookService {
 
     public void delBook(Book book) throws ValidatorException {
         repository.delete(book.getId());
+    }
+
+    public Optional<Book> findOne(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("ID must not be null.");
+        }
+        return this.repository.findOne(id);
     }
 
     public Set<Book> getAllBooks() {
