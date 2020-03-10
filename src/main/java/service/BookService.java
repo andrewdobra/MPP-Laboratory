@@ -1,6 +1,7 @@
 package service;
 
 import domain.Book;
+import domain.validators.Validator;
 import domain.validators.ValidatorException;
 import repository.Repository;
 
@@ -11,12 +12,15 @@ import java.util.stream.StreamSupport;
 
 public class BookService {
     private Repository<Long, Book> repository;
+    protected Validator<Book> validator;
 
-    public BookService(Repository<Long, Book> repository) {
+    public BookService(Repository<Long, Book> repository, Validator<Book> validator) {
         this.repository = repository;
+        this.validator = validator;
     }
 
     public void addBook(Book book) throws ValidatorException {
+        validator.validate(book);
         repository.save(book);
     }
 

@@ -11,10 +11,8 @@ import java.util.stream.Collectors;
 public class InMemoryRepository<ID, T extends BaseEntity<ID>> implements Repository<ID, T> {
 
     protected Map<ID, T> entities;
-    protected Validator<T> validator;
 
-    public InMemoryRepository(Validator<T> validator) {
-        this.validator = validator;
+    public InMemoryRepository() {
         entities = new HashMap<>();
     }
 
@@ -36,7 +34,6 @@ public class InMemoryRepository<ID, T extends BaseEntity<ID>> implements Reposit
         if (entity == null) {
             throw new IllegalArgumentException("Entity must not be null.");
         }
-        validator.validate(entity);
         return Optional.ofNullable(entities.putIfAbsent(entity.getId(), entity));
     }
 
@@ -53,7 +50,6 @@ public class InMemoryRepository<ID, T extends BaseEntity<ID>> implements Reposit
         if (entity == null) {
             throw new IllegalArgumentException("Entity must not be null.");
         }
-        validator.validate(entity);
         return Optional.ofNullable(entities.computeIfPresent(entity.getId(), (k, v) -> entity));
     }
 }

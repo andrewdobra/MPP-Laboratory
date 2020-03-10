@@ -11,13 +11,20 @@ import java.util.stream.StreamSupport;
 
 public class PurchaseService {
     private Repository<Long, Purchase> repository;
+    protected Validator<Purchase> validator;
 
-    public PurchaseService(Repository<Long, Purchase> repository) {
+    public PurchaseService(Repository<Long, Purchase> repository, Validator<Purchase> validator) {
         this.repository = repository;
+        this.validator = validator;
     }
 
-    public void addPurchase(Purchase student) throws ValidatorException {
-        repository.save(student);
+    public void addPurchase(Purchase purchase) throws ValidatorException {
+        try {
+            validator.validate(purchase);
+            repository.save(purchase);
+        } catch (ValidatorException err){
+            System.out.println(err);
+        }
     }
 
     public void delPurchase(Purchase purchase) throws ValidatorException {
@@ -31,11 +38,6 @@ public class PurchaseService {
 
     public Set<Purchase> filterPurchasesByClient(Long id) {
         Iterable<Purchase> students = repository.findAll();
-        //version 1
-//        Set<Purchase> filteredPurchases = StreamSupport.stream(students.spliterator(), false)
-//                .filter(student -> student.getName().contains(s)).collect(Collectors.toSet());
-
-        //version 2
         Set<Purchase> filteredPurchases= new HashSet<>();
         students.forEach(filteredPurchases::add);
         filteredPurchases.removeIf(purchase -> !purchase.getClientID().equals(id));
@@ -45,11 +47,6 @@ public class PurchaseService {
 
     public Set<Purchase> filterPurchasesByBook(Long id) {
         Iterable<Purchase> students = repository.findAll();
-        //version 1
-//        Set<Purchase> filteredPurchases = StreamSupport.stream(students.spliterator(), false)
-//                .filter(student -> student.getName().contains(s)).collect(Collectors.toSet());
-
-        //version 2
         Set<Purchase> filteredPurchases= new HashSet<>();
         students.forEach(filteredPurchases::add);
         filteredPurchases.removeIf(purchase -> !purchase.getBookID().equals(id));
