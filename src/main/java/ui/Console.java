@@ -175,16 +175,12 @@ public class Console {
     }
 
     private void delPurchases() {
-        while (true) {
-            Purchase purchase = readPurchase("");
-            if (purchase == null || purchase.getId() < 0) {
-                break;
-            }
-            try {
-                purchaseService.delPurchase(purchase);
-            } catch (ValidatorException e) {
-                e.printStackTrace();
-            }
+
+        Purchase purchase = readPurchase("");
+        try {
+            purchaseService.delPurchase(purchase);
+        } catch (ValidatorException e) {
+            e.printStackTrace();
         }
     }
     private Purchase readPurchase(String s) {
@@ -204,81 +200,63 @@ public class Console {
     }
 
     private void addBooks() {
-        while (true) {
-            Book book = readBook("");
 
-            if (book == null || book.getId() < 0) {
-                break;
-            }
-
-            try {
-                bookService.addBook(book);
-            } catch (ValidatorException err) {
-                System.out.println(err.toString());
-            }
+        Book book = readBook("");
+        try {
+            bookService.addBook(book);
+        } catch (ValidatorException err) {
+            System.out.println(err.toString());
         }
+
     }
 
     private void updateBooks() {
-        while (true) {
-            Book oldBook = readBook("old ");
 
-            if (oldBook == null || oldBook.getId() < 0) {
-                break;
-            }
-
-            try {
-                Book newBook = readBook("new ");
-                bookService.delBook(oldBook);
-                bookService.addBook(newBook);
-            } catch (ValidatorException err) {
-                System.out.println(err.toString());
-            }
+        Book oldBook = readBook("old ");
+        try {
+            Book newBook = readBook("new ");
+            bookService.delBook(oldBook);
+            bookService.addBook(newBook);
+        } catch (ValidatorException err) {
+            System.out.println(err.toString());
         }
+
     }
 
     private void updateClients() {
-        while (true) {
-            Client oldClient = readClient("old ");
-            if (oldClient == null || oldClient.getId() < 0) {
-                break;
-            }
-            try {
-                Client newClient = readClient("new ");
-                clientService.delClient(oldClient);
-                clientService.addClient(newClient);
-            } catch (ValidatorException err) {
-                System.out.println(err.toString());
-            }
+
+        Client oldClient = readClient("old ");
+        try {
+            Client newClient = readClient("new ");
+            clientService.delClient(oldClient);
+            clientService.addClient(newClient);
+        } catch (ValidatorException err) {
+            System.out.println(err.toString());
         }
+
     }
 
     private void delClients() {
-        while (true) {
-            Client client = readClient("");
-            if (client == null || client.getId() < 0) {
-                break;
-            }
-            try {
-                clientService.delClient(client);
-            } catch (ValidatorException err) {
-                System.out.println(err.toString());
-            }
+
+        Client client = readClient("");
+        try {
+            clientService.delClient(client);
+        } catch (ValidatorException err) {
+            System.out.println(err.toString());
         }
+
     }
 
     private void delBooks() {
-        while (true) {
-            Book book = readBook("");
-            if (book == null || book.getId() < 0) {
-                break;
-            }
-            try {
-                bookService.delBook(book);
-            } catch (ValidatorException err) {
-                System.out.println(err.toString());
-            }
+
+        Book book = readBook("");
+
+        try {
+            bookService.delBook(book);
+        } catch (ValidatorException err) {
+            System.out.println(err.toString());
         }
+
     }
 
     private Client readClient(String s) {
