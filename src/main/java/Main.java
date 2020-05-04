@@ -7,23 +7,25 @@ import service.*;
 import repository.*;
 import ui.*;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String args[]) {
         Validator<Client> clientValidator = new ClientValidator();
         Validator<Book> bookValidator = new BookValidator();
         Validator<Purchase> purchaseValidator = new PurchaseValidator();
 
-        Repository<Long,Client> clientFileRepository = new ClientFileRepository(clientValidator, "src\\data\\clients.txt");
-        Repository<Long, Book> bookFileRepository = new BookFileRepository(bookValidator, "src\\data\\books.txt");
-        Repository<Long, Purchase> purchaseFileRepository = new PurchaseFileRepository(purchaseValidator, "src\\data\\purchases.txt");
+        Repository<Long,Client> clientFileRepository = new ClientFileRepository( "src\\data\\clients.txt");
+        Repository<Long, Book> bookFileRepository = new BookFileRepository("src\\data\\books.txt");
+        Repository<Long, Purchase> purchaseFileRepository = new PurchaseFileRepository("src\\data\\purchases.txt");
 
-        Repository<Long, Client> clientXMLRepository = new XMLRepository<Long,Client>(clientValidator,new ClientXML(),"src\\data\\clients.xml");//
-        Repository<Long, Book> bookXMLRepository = new XMLRepository<Long,Book>(bookValidator,new BookXML(), "src\\data\\books.xml");
-        Repository<Long, Purchase> purchaseXMLRepository = new XMLRepository<Long,Purchase>(purchaseValidator,new PurchaseXML(), "src\\data\\purchases.xml");
+        Repository<Long, Client> clientXMLRepository = new XMLRepository(new ClientXML(),"src\\data\\clients.xml");//
+        Repository<Long, Book> bookXMLRepository = new XMLRepository(new BookXML(), "src\\data\\books.xml");
+        Repository<Long, Purchase> purchaseXMLRepository = new XMLRepository(new PurchaseXML(), "src\\data\\purchases.xml");
 
-        Repository<Long, Client> clientSQLRepository = new DatabaseRepository<Long,Client>(clientValidator,"Clients",new ClientSQL());
-        Repository<Long, Book> bookSQLRepository = new DatabaseRepository<Long,Book>(bookValidator,"Books",new BookSQL());
-        Repository<Long, Purchase> purchaseSQLRepository = new DatabaseRepository<Long,Purchase>(purchaseValidator,"Purchases",new PurchaseSQL());
+//        Repository<Long, Client> clientSQLRepository = new DatabaseRepository<Long,Client>(clientValidator,"Clients",new ClientSQL());
+//        Repository<Long, Book> bookSQLRepository = new DatabaseRepository<Long,Book>(bookValidator,"Books",new BookSQL());
+//        Repository<Long, Purchase> purchaseSQLRepository = new DatabaseRepository<Long,Purchase>(purchaseValidator,"Purchases",new PurchaseSQL());
 
         Repository<Long, Book> bookRepository;
         Repository<Long, Client> clientRepository;
@@ -45,15 +47,15 @@ public class Main {
                 purchaseRepository = purchaseXMLRepository;
                 break;
             default:
-                bookRepository = bookSQLRepository;
-                clientRepository = clientSQLRepository;
-                purchaseRepository = purchaseSQLRepository;
+                bookRepository = bookXMLRepository;
+                clientRepository = clientXMLRepository;
+                purchaseRepository = purchaseXMLRepository;
 
         }
 
-        ClientService clientService = new ClientService(clientRepository);
-        BookService bookService = new BookService(bookRepository);
-        PurchaseService purchaseService = new PurchaseService(purchaseRepository);
+        ClientService clientService = new ClientService(clientRepository,clientValidator);
+        BookService bookService = new BookService(bookRepository,bookValidator);
+        PurchaseService purchaseService = new PurchaseService(purchaseRepository,purchaseValidator,bookService,clientService);
         Console console = new Console(clientService, bookService, purchaseService);
         console.runConsole();
     }
