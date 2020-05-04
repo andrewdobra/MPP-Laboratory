@@ -17,11 +17,11 @@ public class PurchaseSQL extends SQLElement<Long, Purchase> {
 
     @Override
     public String insertSQL(Purchase purchase) {
-        return "INSERT INTO Purchases(id, ClientID, BookID) VALUES("+ purchase.getId() + "," + "\"" + purchase.getClientID() + "\"," + "\"" + purchase.getBookID()+"\")";
+        return "INSERT INTO Purchases(id, ClientID, BookID) VALUES("+ purchase.getId() + ", " + purchase.getClientID() + ", " + purchase.getBookID()+");";
     }
 
     @Override
     public String updateSQL(Purchase purchase) {
-        return "UPDATE Purchases SET ClientID=\""+purchase.getClientID()+"SET BookID=\""+purchase.getBookID()+"\" WHERE id="+purchase.getId();
+        return "UPDATE Purchases SET ClientID=" + purchase.getClientID() + "SET BookID="+purchase.getBookID() + " WHERE id=" + purchase.getId() + ";";
     }
 }

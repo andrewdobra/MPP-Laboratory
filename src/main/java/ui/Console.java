@@ -64,7 +64,7 @@ public class Console {
                 case 15: filterPurchases(); break;
             }
 
-            System.out.print("Hello Bookstore!\n\n" +
+            System.out.print("\n" +
                     "Choose an action:\n" +
                     "1. Add Clients\n" +
                     "2. Add Books\n" +

@@ -16,11 +16,11 @@ public class BookSQL extends SQLElement<Long, Book> {
 
     @Override
     public String insertSQL(Book book) {
-        return "INSERT INTO Books(id,name) VALUES("+book.getId()+","+"\""+book.getName()+"\")";
+        return "INSERT INTO Books(id, name) VALUES("+book.getId()+",'"+book.getName()+"');";
     }
 
     @Override
     public String updateSQL(Book book) {
-        return "UPDATE Books SET name=\""+book.getName()+"\" WHERE id="+book.getId();
+        return "UPDATE Books SET name='"+book.getName()+"' WHERE id="+book.getId()+";";
     }
 }

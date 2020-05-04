@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class DatabaseRepository<ID, T extends BaseEntity<ID>> implements Repository<ID, T> {
-    private static final String URL = "jdbc:postgresql://localhost:5432/Bookstore";
+    private static final String URL = "jdbc:postgresql://localhost:4242/Bookstore?user=postgres&password=admin";
     private static final String USERNAME = "postgres";
     private static final String PASSWORD = "admin";
 

@@ -95,7 +95,7 @@ fabric.properties
 ### Java ###
 # Compiled class file
 *.class
-.idea/*
+#.idea/*
 
 ### Gradle ###
 .gradle

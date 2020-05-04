@@ -16,11 +16,11 @@ public class ClientSQL extends SQLElement<Long, Client> {
 
     @Override
     public String insertSQL(Client client) {
-        return "INSERT INTO Clients(id,name) VALUES("+client.getId()+","+"\""+client.getName()+"\")";
+        return "INSERT INTO Clients(id, name) VALUES(" + client.getId() + ", '" + client.getName() + "');";
     }
 
     @Override
     public String updateSQL(Client client) {
-        return "UPDATE Clients SET name=\""+client.getName()+"\" WHERE id="+client.getId();
+        return "UPDATE Clients SET name='" + client.getName()+ "' WHERE id=" + client.getId() + ";";
     }
 }
