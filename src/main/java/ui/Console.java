@@ -140,48 +140,38 @@ public class Console {
     }
 
     private void addClients() {
-        while (true) {
-            Client client = readClient("");
 
-            if (client == null || client.getId() < 0) {
-                break;
-            }
+        Client client = readClient("");
 
-            try {
-                clientService.addClient(client);
-            } catch (ValidatorException err) {
-                System.out.println(err.toString());
-            }
+        try {
+            clientService.addClient(client);
+        } catch (ValidatorException err) {
+            System.out.println(err.toString());
         }
+
     }
     private void addPurchases() {
-        while (true) {
-            Purchase purchase = readPurchase("");
-            if (purchase == null || purchase.getId() < 0) {
-                break;
-            }
-            try {
-                purchaseService.addPurchase(purchase);
-            } catch (ValidatorException err) {
-                System.out.println(err.toString());
-            }
+
+        Purchase purchase = readPurchase("");
+        try {
+            purchaseService.addPurchase(purchase);
+        } catch (ValidatorException err) {
+            System.out.println(err.toString());
         }
+
     }
 
     private void updatePurchases() {
-        while (true) {
-            Purchase purchase1 = readPurchase("old ");
-            if (purchase1 == null || purchase1.getId() < 0) {
-                break;
-            }
-            try {
-                Purchase purchase2 = readPurchase("new ");
-                purchaseService.delPurchase(purchase1);
-                purchaseService.addPurchase(purchase2);
-            } catch (ValidatorException e) {
-                e.printStackTrace();
-            }
+
+        Purchase purchase1 = readPurchase("old ");
+        try {
+            Purchase purchase2 = readPurchase("new ");
+            purchaseService.delPurchase(purchase1);
+            purchaseService.addPurchase(purchase2);
+        } catch (ValidatorException e) {
+            e.printStackTrace();
         }
+
     }
 
     private void delPurchases() {
