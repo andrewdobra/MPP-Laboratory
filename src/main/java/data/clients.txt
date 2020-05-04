@@ -1,4 +1,3 @@
 1,Paul
 2,Tudor
 4,Marcelino
-200,Danut
