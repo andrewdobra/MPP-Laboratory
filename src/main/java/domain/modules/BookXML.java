@@ -1,6 +1,5 @@
-package domain.xml;
+package domain.modules;
 
-import domain.BaseEntity;
 import domain.Book;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

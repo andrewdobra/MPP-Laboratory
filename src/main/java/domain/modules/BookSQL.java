@@ -1,6 +1,5 @@
-package domain.xml;
+package domain.modules;
 
-import domain.BaseEntity;
 import domain.Book;
 
 import java.sql.ResultSet;

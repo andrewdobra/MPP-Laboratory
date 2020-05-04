@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><root>
-    <elem id="1" CID="1" BID = "2"/>
-    <elem id="2" CID="1" BID = "1"/>
-    <elem id="3" CID="2" BID="2"/>
+<elem BID="2" CID="1" id="1"/>
+<elem BID="1" CID="1" id="2"/>
+<elem BID="2" CID="2" id="3"/>
 </root>

@@ -1,4 +1,4 @@
-package domain.xml;
+package domain.modules;
 
 import domain.Purchase;
 import org.w3c.dom.Document;

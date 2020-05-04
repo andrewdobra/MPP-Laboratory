@@ -1,9 +1,8 @@
-package domain.xml;
+package domain.modules;
 
 import domain.Client;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 
 public class ClientXML extends XMLElement<Client> {
     @Override

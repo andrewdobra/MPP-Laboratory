@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><root>
     <elem id="1" name="John Doe"/>
     <elem id="2" name="Thomas"/>
-    <elem id="4" name="Robert"/>
-    <elem id="22" name="Paul"/>
+    <elem id="3" name="Robert"/>
+    <elem id="4" name="Paul"/>
 </root>
