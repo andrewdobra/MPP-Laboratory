@@ -15,17 +15,16 @@ public class Main {
         Validator<Book> bookValidator = new BookValidator();
         Validator<Purchase> purchaseValidator = new PurchaseValidator();
 
-        Repository<Long,Client> clientFileRepository = new ClientFileRepository( "src\\data\\clients.txt");
-        Repository<Long, Book> bookFileRepository = new BookFileRepository("src\\data\\books.txt");
-        Repository<Long, Purchase> purchaseFileRepository = new PurchaseFileRepository("src\\data\\purchases.txt");
+//        String systemPath = "src\\data\\";
+        String systemPath = "src/main/java/data/";
 
-        Repository<Long, Client> clientXMLRepository = new XMLRepository(new ClientXML(),"src\\data\\clients.xml");//
-        Repository<Long, Book> bookXMLRepository = new XMLRepository(new BookXML(), "src\\data\\books.xml");
-        Repository<Long, Purchase> purchaseXMLRepository = new XMLRepository(new PurchaseXML(), "src\\data\\purchases.xml");
+        Repository<Long,Client> clientFileRepository = new ClientFileRepository( systemPath + "clients.txt");
+        Repository<Long, Book> bookFileRepository = new BookFileRepository(systemPath + "books.txt");
+        Repository<Long, Purchase> purchaseFileRepository = new PurchaseFileRepository(systemPath + "purchases.txt");
 
-//        Repository<Long, Client> clientSQLRepository = new DatabaseRepository<Long,Client>(clientValidator,"Clients",new ClientSQL());
-//        Repository<Long, Book> bookSQLRepository = new DatabaseRepository<Long,Book>(bookValidator,"Books",new BookSQL());
-//        Repository<Long, Purchase> purchaseSQLRepository = new DatabaseRepository<Long,Purchase>(purchaseValidator,"Purchases",new PurchaseSQL());
+        Repository<Long, Client> clientXMLRepository = new XMLRepository(new ClientXML(),systemPath + "clients.xml");//
+        Repository<Long, Book> bookXMLRepository = new XMLRepository(new BookXML(), systemPath + "books.xml");
+        Repository<Long, Purchase> purchaseXMLRepository = new XMLRepository(new PurchaseXML(), systemPath + "purchases.xml");
 
         Repository<Long, Book> bookRepository;
         Repository<Long, Client> clientRepository;
