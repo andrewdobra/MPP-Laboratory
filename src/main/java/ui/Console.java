@@ -182,6 +182,7 @@ public class Console {
         } catch (ValidatorException e) {
             e.printStackTrace();
         }
+
     }
     private Purchase readPurchase(String s) {
         System.out.println("Input " + s + "purchase {ID, Client ID, Book ID}:");
