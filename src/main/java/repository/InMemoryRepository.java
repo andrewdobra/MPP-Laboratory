@@ -30,7 +30,7 @@ public class InMemoryRepository<ID, T extends BaseEntity<ID>> implements Reposit
     }
 
     @Override
-    public Optional<T> save(T entity) throws ValidatorException {
+    public Optional<T> save(T entity) {
         if (entity == null) {
             throw new IllegalArgumentException("Entity must not be null.");
         }
@@ -46,7 +46,7 @@ public class InMemoryRepository<ID, T extends BaseEntity<ID>> implements Reposit
     }
 
     @Override
-    public Optional<T> update(T entity) throws ValidatorException {
+    public Optional<T> update(T entity) {
         if (entity == null) {
             throw new IllegalArgumentException("Entity must not be null.");
         }
