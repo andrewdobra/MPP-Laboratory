@@ -22,9 +22,9 @@ public class Main {
         Repository<Long, Book> bookFileRepository = new BookFileRepository(systemPath + "books.txt");
         Repository<Long, Purchase> purchaseFileRepository = new PurchaseFileRepository(systemPath + "purchases.txt");
 
-        Repository<Long, Client> clientXMLRepository = new XMLRepository(new ClientXML(),systemPath + "clients.xml");//
-        Repository<Long, Book> bookXMLRepository = new XMLRepository(new BookXML(), systemPath + "books.xml");
-        Repository<Long, Purchase> purchaseXMLRepository = new XMLRepository(new PurchaseXML(), systemPath + "purchases.xml");
+        Repository<Long, Client> clientXMLRepository = new XMLRepository<>(new ClientXML(),systemPath + "clients.xml");//
+        Repository<Long, Book> bookXMLRepository = new XMLRepository<>(new BookXML(), systemPath + "books.xml");
+        Repository<Long, Purchase> purchaseXMLRepository = new XMLRepository<>(new PurchaseXML(), systemPath + "purchases.xml");
 
         Repository<Long, Book> bookRepository;
         Repository<Long, Client> clientRepository;
