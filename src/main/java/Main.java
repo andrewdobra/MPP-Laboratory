@@ -67,6 +67,9 @@ public class Main {
             ClientService clientService = new ClientService(clientRepository, clientValidator);
             PurchaseService purchaseService = new PurchaseService(purchaseRepository, purchaseValidator, bookService, clientService);
 
+            bookService.setPurchaseService(purchaseService);
+            clientService.setPurchaseService(purchaseService);
+
             Console console = new Console(clientService, bookService, purchaseService);
             console.runConsole();
         }

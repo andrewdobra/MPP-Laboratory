@@ -22,7 +22,7 @@ public class Server {
     private ExecutorService executorService;
     private ClientService clientService;
     private BookService bookService;
-    private PurchaseService purchaseService;
+    private PurchaseService purchaseService = null;
     private String signal = "endRead";
     private String stopSignal = "";
 
@@ -46,6 +46,9 @@ public class Server {
         this.clientService = new ClientService(clientRepository, clientValidator);
         this.bookService = new BookService(bookRepository, bookValidator);
         this.purchaseService = new PurchaseService(purchaseRepository, purchaseValidator, this.bookService, this.clientService);
+
+        this.bookService.setPurchaseService(this.purchaseService);
+        this.clientService.setPurchaseService(this.purchaseService);
 
         this.executorService = Executors.newFixedThreadPool(10);
 
@@ -403,13 +406,13 @@ public class Server {
     }
 
     private Client readClient(String s, BufferedReader input, PrintWriter output) {
-        output.println("Input " + s + " client ID:");
+        output.println("Input " + s + "client ID:");
         output.println(signal);
 
         try {
             Long id = Long.valueOf(input.readLine());
 
-            output.println("Input " + s + " client name:");
+            output.println("Input " + s + "client name:");
             output.println(signal);
 
             String name = input.readLine();
@@ -423,13 +426,13 @@ public class Server {
     }
 
     private Book readBook(String s, BufferedReader input, PrintWriter output) {
-        output.println("Input " + s + " book ID:");
+        output.println("Input " + s + "book ID:");
         output.println(signal);
 
         try {
             Long id = Long.valueOf(input.readLine());
 
-            output.println("Input " + s + " book name:");
+            output.println("Input " + s + "book name:");
             output.println(signal);
 
             String name = input.readLine();
@@ -443,18 +446,18 @@ public class Server {
     }
 
     private Purchase readPurchase(String s, BufferedReader input, PrintWriter output) {
-        output.println("Input " + s + " purchase ID:");
+        output.println("Input " + s + "purchase ID:");
         output.println(signal);
 
         try {
             Long id = Long.valueOf(input.readLine());
 
-            output.println("Input " + s + " purchase client ID:");
+            output.println("Input " + s + "purchase client ID:");
             output.println(signal);
 
             Long CID = Long.valueOf(input.readLine());
 
-            output.println("Input " + s + " purchase book ID:");
+            output.println("Input " + s + "purchase book ID:");
             output.println(signal);
 
             Long BID = Long.valueOf(input.readLine());

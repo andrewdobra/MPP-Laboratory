@@ -78,10 +78,9 @@ public class DatabaseRepository<ID, T extends BaseEntity<ID>> implements Reposit
     public Optional<T> delete(ID id) {
         Optional<T> elem = findOne(id);
 
-        String sql = "DELETE FROM "+ tableName + " WHERE id=?";
+        String sql = "DELETE FROM "+ tableName + " WHERE id=" + id.toString();
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, id.toString());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

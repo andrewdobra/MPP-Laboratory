@@ -1,6 +1,7 @@
 package service;
 
 import domain.Book;
+import domain.Purchase;
 import domain.validators.Validator;
 import domain.validators.ValidatorException;
 import repository.Repository;
@@ -15,9 +16,15 @@ public class BookService {
     private Repository<Long, Book> repository;
     protected Validator<Book> validator;
 
+    private PurchaseService purchaseService;
+
     public BookService(Repository<Long, Book> repository, Validator<Book> validator) {
         this.repository = repository;
         this.validator = validator;
+    }
+
+    public void setPurchaseService(PurchaseService purchaseService) {
+        this.purchaseService = purchaseService;
     }
 
     public void addBook(Book book) throws ValidatorException {
@@ -28,6 +35,9 @@ public class BookService {
     public void delBook(Book book) throws ValidatorException {
         validator.validate(book);
         repository.delete(book.getId());
+
+        Set<Purchase> purchases = purchaseService.filterPurchasesByBook(book.getId());
+        purchases.forEach(purchase -> { purchaseService.delPurchase(purchase); });
     }
 
     public Optional<Book> findOne(Long id) {
