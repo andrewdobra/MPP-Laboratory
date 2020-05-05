@@ -39,6 +39,7 @@ public class PurchaseService {
     }
 
     public void delPurchase(Purchase purchase) throws ValidatorException {
+        validator.validate(purchase);
         repository.delete(purchase.getId());
     }
 

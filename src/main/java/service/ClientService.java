@@ -26,6 +26,7 @@ public class ClientService {
     }
 
     public void delClient(Client client) throws ValidatorException {
+        validator.validate(client);
         repository.delete(client.getId());
     }
 

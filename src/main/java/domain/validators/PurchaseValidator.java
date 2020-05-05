@@ -1,15 +1,11 @@
 package domain.validators;
 
-import domain.Book;
-import domain.Client;
 import domain.Purchase;
-import repository.Repository;
 
-public class PurchaseValidator implements Validator<Purchase>{
+public class PurchaseValidator implements Validator<Purchase> {
+    @Override
     public void validate(Purchase entity) throws ValidatorException {
-        if (entity != null) {
-            return;
-        } else
+        if (!(entity != null && entity.getId() >= 0 && entity.getBookID() >= 0 && entity.getClientID() >= 0))
             throw new ValidatorException("Purchase can not be null.");
     }
 }

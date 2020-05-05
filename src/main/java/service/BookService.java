@@ -26,6 +26,7 @@ public class BookService {
     }
 
     public void delBook(Book book) throws ValidatorException {
+        validator.validate(book);
         repository.delete(book.getId());
     }
 
